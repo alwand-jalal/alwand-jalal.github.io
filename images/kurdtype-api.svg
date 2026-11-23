@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" width="800" height="450">
+  <rect width="800" height="450" fill="#1b1530"/>
+  <rect x="60" y="50" width="680" height="350" rx="16" fill="#120e22" stroke="#3a3057"/>
+  <circle cx="92" cy="80" r="7" fill="#e0685a"/><circle cx="116" cy="80" r="7" fill="#e8b94a"/><circle cx="140" cy="80" r="7" fill="#5fb58a"/>
+  <text x="400" y="86" text-anchor="middle" font-family="Menlo, Consolas, monospace" font-size="16" fill="#8a80a8">GET /api/v1/leaderboard</text>
+  <g font-family="Menlo, Consolas, monospace" font-size="22">
+    <text x="96" y="140" fill="#f4efe4">{</text>
+    <text x="126" y="175"><tspan fill="#9bc3f0">"data"</tspan><tspan fill="#f4efe4">: [</tspan></text>
+    <text x="156" y="210"><tspan fill="#f4efe4">{ </tspan><tspan fill="#9bc3f0">"rank"</tspan><tspan fill="#f4efe4">: </tspan><tspan fill="#e8b94a">1</tspan><tspan fill="#f4efe4">, </tspan><tspan fill="#9bc3f0">"wpm"</tspan><tspan fill="#f4efe4">: </tspan><tspan fill="#e8b94a">94</tspan><tspan fill="#f4efe4"> },</tspan></text>
+    <text x="156" y="245"><tspan fill="#f4efe4">{ </tspan><tspan fill="#9bc3f0">"rank"</tspan><tspan fill="#f4efe4">: </tspan><tspan fill="#e8b94a">2</tspan><tspan fill="#f4efe4">, </tspan><tspan fill="#9bc3f0">"wpm"</tspan><tspan fill="#f4efe4">: </tspan><tspan fill="#e8b94a">88</tspan><tspan fill="#f4efe4"> }</tspan></text>
+    <text x="126" y="280" fill="#f4efe4">],</text>
+    <text x="126" y="315"><tspan fill="#9bc3f0">"live"</tspan><tspan fill="#f4efe4">: </tspan><tspan fill="#5fb58a">true</tspan></text>
+    <text x="96" y="350" fill="#f4efe4">}</text>
+  </g>
+  <text x="704" y="370" text-anchor="end" font-family="Helvetica, Arial, sans-serif" font-size="18" font-weight="700" fill="#e8b94a">Laravel · Redis · Reverb</text>
+</svg>

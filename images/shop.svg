@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" width="800" height="450">
+  <rect width="800" height="450" fill="#f6efe2"/>
+  <rect width="800" height="56" fill="#231c40"/>
+  <rect x="40" y="18" width="110" height="20" rx="10" fill="#f2b84b"/>
+  <rect x="520" y="22" width="56" height="12" rx="6" fill="#ffffff" opacity="0.35"/>
+  <rect x="590" y="22" width="56" height="12" rx="6" fill="#ffffff" opacity="0.35"/>
+  <path d="M708 20 h6 l6 18 h18 l5 -13 h-26" fill="none" stroke="#f6efe2" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/>
+  <circle cx="724" cy="42" r="2.6" fill="#f6efe2"/><circle cx="736" cy="42" r="2.6" fill="#f6efe2"/>
+  <circle cx="745" cy="18" r="8" fill="#c0563f"/>
+  <text x="745" y="22" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="10" font-weight="700" fill="#ffffff">2</text>
+  <g>
+    <rect x="60" y="90" width="210" height="300" rx="16" fill="#ffffff" stroke="#e4d9c4"/>
+    <rect x="76" y="106" width="178" height="170" rx="10" fill="#f0c98a"/>
+    <rect x="76" y="294" width="120" height="12" rx="6" fill="#2d2540"/>
+    <rect x="76" y="316" width="70" height="10" rx="5" fill="#c0563f"/>
+    <rect x="76" y="344" width="178" height="30" rx="15" fill="#231c40"/>
+    <rect x="295" y="90" width="210" height="300" rx="16" fill="#ffffff" stroke="#e4d9c4"/>
+    <rect x="311" y="106" width="178" height="170" rx="10" fill="#c9b6dc"/>
+    <rect x="311" y="294" width="140" height="12" rx="6" fill="#2d2540"/>
+    <rect x="311" y="316" width="60" height="10" rx="5" fill="#c0563f"/>
+    <rect x="311" y="344" width="178" height="30" rx="15" fill="#231c40"/>
+    <rect x="530" y="90" width="210" height="300" rx="16" fill="#ffffff" stroke="#e4d9c4" stroke-dasharray="8 6"/>
+    <rect x="546" y="106" width="178" height="170" rx="10" fill="#efe6d4"/>
+    <rect x="546" y="294" width="100" height="12" rx="6" fill="#d8ccb6"/>
+    <rect x="546" y="316" width="50" height="10" rx="5" fill="#d8ccb6"/>
+    <rect x="546" y="344" width="178" height="30" rx="15" fill="#d8ccb6"/>
+  </g>
+  <rect x="590" y="404" width="150" height="30" rx="15" fill="#f2b84b"/>
+  <text x="665" y="424" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="13" font-weight="700" fill="#231c40">IN PROGRESS</text>
+</svg>

@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" width="800" height="450">
+  <rect width="800" height="450" fill="#e6eaf2"/>
+  <rect width="800" height="56" fill="#edf0f6"/>
+  <rect x="0" y="56" width="800" height="1" fill="#d3d9e5"/>
+  <rect x="40" y="12" width="32" height="32" rx="9" fill="#ffffff"/>
+  <path d="M50 37 C 52 27, 58 20, 64 18 C 63 26, 58 32, 50 37 Z M50 37 L 58 27" fill="none" stroke="#2f3a4e" stroke-width="2.2" stroke-linecap="round"/>
+  <text x="84" y="35" font-family="Helvetica, Arial, sans-serif" font-size="19" font-weight="700" fill="#2f3a4e">Chirper</text>
+  <rect x="290" y="15" width="220" height="27" rx="13.5" fill="#f4f6fa" stroke="#cfd6e3"/>
+  <text x="318" y="33" font-family="Helvetica, Arial, sans-serif" font-size="12" fill="#8a93a6">Search</text>
+  <rect x="680" y="14" width="80" height="29" rx="14.5" fill="#5a7aa6"/>
+  <text x="720" y="33" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="12" font-weight="700" fill="#ffffff">Sign in</text>
+  <text x="180" y="100" font-family="Helvetica, Arial, sans-serif" font-size="28" font-weight="700" fill="#2f3a4e">Latest Chirps</text>
+  <g font-family="Helvetica, Arial, sans-serif">
+    <rect x="180" y="122" width="440" height="96" rx="18" fill="#f2f4f8" stroke="#d6dce8"/>
+    <circle cx="214" cy="152" r="16" fill="#e8b94a"/>
+    <text x="240" y="150" font-size="14" font-weight="700" fill="#2f3a4e">alwandjalal</text>
+    <text x="240" y="167" font-size="12" fill="#8a93a6">@alwandjalal · 2 weeks ago</text>
+    <text x="240" y="192" font-size="14" fill="#2f3a4e">Just shipped Chirper on Laravel Cloud.</text>
+    <text x="240" y="210" font-size="12" fill="#8a93a6">○ 3     ♡ 12</text>
+    <rect x="180" y="232" width="440" height="96" rx="18" fill="#f2f4f8" stroke="#d6dce8"/>
+    <circle cx="214" cy="262" r="16" fill="#7fb7c9"/>
+    <text x="240" y="260" font-size="14" font-weight="700" fill="#2f3a4e">student_dev</text>
+    <text x="240" y="277" font-size="12" fill="#8a93a6">@student_dev · 2 weeks ago</text>
+    <text x="240" y="302" font-size="14" fill="#2f3a4e">Signing in with GitHub took one click.</text>
+    <text x="240" y="320" font-size="12" fill="#8a93a6">○ 1     ♡ 5</text>
+    <rect x="180" y="342" width="440" height="96" rx="18" fill="#f2f4f8" stroke="#d6dce8"/>
+    <circle cx="214" cy="372" r="16" fill="#b59ad6"/>
+    <text x="240" y="370" font-size="14" font-weight="700" fill="#2f3a4e">erbil_coder</text>
+    <text x="240" y="387" font-size="12" fill="#8a93a6">@erbil_coder · 3 weeks ago</text>
+    <text x="240" y="412" font-size="14" fill="#2f3a4e">First chirp. Hello from Erbil!</text>
+  </g>
+</svg>

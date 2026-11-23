@@ -1,0 +1,1275 @@
+/* ==========================================================
+   Portfolio of Alwand Jalal
+   Art direction: "One evening in Erbil." The page scrolls from
+   sunset over the citadel, through dusk, into a starry night,
+   and ends at 23:59. Each section is a different hour, and the
+   work sits inside it like lit windows.
+   ========================================================== */
+
+
+/* ----------------------------------------------------------
+   1. Base styles: reset, theme tokens and readable text
+   ---------------------------------------------------------- */
+
+/* Reset: borders and padding count inside an element's width */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* Theme: every colour, font and space on the page */
+:root {
+  /* The evening sky, from light to dark (oklch: lightness, chroma, hue) */
+  --cream: oklch(97% 0.015 85);
+  --sand: oklch(91% 0.035 75);
+  --peach: oklch(86% 0.07 60);
+  --sun: oklch(82% 0.14 80);
+  --sun-deep: oklch(70% 0.15 68);
+  --ember: oklch(60% 0.16 38);
+  --rose: oklch(66% 0.12 350);
+  --plum: oklch(36% 0.1 330);
+  --dusk: oklch(28% 0.08 315);
+  --night: oklch(19% 0.045 285);
+  --midnight: oklch(14% 0.035 285);
+  --white: oklch(100% 0 0);
+
+  /* Text */
+  --ink: oklch(22% 0.04 285);
+  --mute: oklch(45% 0.03 285);
+  --mute-light: oklch(80% 0.03 300);
+  --line: oklch(88% 0.025 80);
+  --line-dark: oklch(100% 0 0 / 0.13);
+  --glass: oklch(100% 0 0 / 0.05);
+
+  /* Fonts: system stacks, plus Vazirmatn for Kurdish script */
+  --font-body: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-display: "Iowan Old Style", "Palatino Linotype", Palatino, "Book Antiqua", Georgia, serif;
+  --font-mono: ui-monospace, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+  --font-kurdish: "Vazirmatn", "Noto Sans Arabic", Tahoma, sans-serif;
+
+  /* Spacing scale */
+  --space-xs: 0.5rem;
+  --space-s: 1rem;
+  --space-m: 1.5rem;
+  --space-l: 2.5rem;
+  --space-xl: clamp(4rem, 10vw, 7.5rem);
+
+  /* Shapes, shadows and timing */
+  --radius: 1.1rem;
+  --pill: 99rem;
+  --shadow-card: inset 0 0.0625rem 0 oklch(100% 0 0 / 0.7), 0 1.5rem 3rem -1.25rem oklch(10% 0.04 285 / 0.55);
+  --shadow-lift: inset 0 0.0625rem 0 oklch(100% 0 0 / 0.7), 0 2.5rem 4rem -1.5rem oklch(10% 0.04 285 / 0.7), 0 0 2.5rem oklch(82% 0.14 80 / 0.25);
+  --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+  --speed: 0.3s;
+}
+
+html {
+  scroll-behavior: smooth;
+  background-color: var(--night);
+}
+
+body {
+  font-family: var(--font-body);
+  font-size: 1.0625rem;
+  line-height: 1.65;
+  color: var(--ink);
+  background-color: var(--night);
+  overflow-wrap: break-word;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Group selector: all headings share the display serif */
+h1,
+h2,
+h3 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  line-height: 1.12;
+  color: inherit;
+  text-wrap: balance;
+}
+
+h2 {
+  font-size: clamp(2rem, 1.3rem + 2.6vw, 3.2rem);
+  letter-spacing: -0.01em;
+  margin-bottom: var(--space-m);
+}
+
+h3 {
+  font-size: 1.2rem;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+a {
+  color: inherit;
+}
+
+a:focus-visible,
+button:focus-visible {
+  outline: 0.2rem solid var(--sun);
+  outline-offset: 0.2rem;
+}
+
+::selection {
+  background-color: var(--sun);
+  color: var(--ink);
+}
+
+/* Class selectors shared by many sections */
+.section {
+  padding: var(--space-xl) var(--space-s);
+  scroll-margin-top: 4rem;
+}
+
+.container {
+  max-width: 70rem;
+  margin: 0 auto;
+}
+
+/* Small monospace label that tells the time of each section */
+.kicker {
+  margin-bottom: var(--space-s);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--sun);
+}
+
+.btn {
+  display: inline-block;
+  padding: 0.85rem 1.9rem;
+  border: 0.1rem solid var(--sun);
+  border-radius: var(--pill);
+  background-color: var(--sun);
+  color: var(--ink);
+  font: 700 1rem var(--font-body);
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color var(--speed), color var(--speed), transform var(--speed) var(--ease);
+}
+
+.btn:hover {
+  background-color: var(--cream);
+  border-color: var(--cream);
+  transform: translateY(-0.15rem);
+}
+
+.btn-ghost {
+  background-color: transparent;
+  border-color: oklch(97% 0.015 85 / 0.6);
+  color: var(--cream);
+}
+
+.btn-ghost:hover {
+  color: var(--ink);
+}
+
+/* Hidden on screen, still read by screen readers */
+.visually-hidden {
+  position: absolute;
+  width: 0.0625rem;
+  height: 0.0625rem;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+
+/* ----------------------------------------------------------
+   2. Navbar: name left, links right, sticks to the top
+   ---------------------------------------------------------- */
+
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background-color: oklch(19% 0.045 285 / 0.82);
+  border-bottom: 0.0625rem solid var(--line-dark);
+  backdrop-filter: blur(0.75rem) saturate(1.4);
+  -webkit-backdrop-filter: blur(0.75rem) saturate(1.4);
+}
+
+.nav-inner {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-xs) var(--space-m);
+  max-width: 70rem;
+  margin: 0 auto;
+  padding: 0.7rem var(--space-s);
+}
+
+.nav-name {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--cream);
+  text-decoration: none;
+}
+
+.nav-sun {
+  width: 1.7rem;
+  transition: transform 0.8s var(--ease);
+}
+
+.nav-name:hover .nav-sun {
+  transform: rotate(120deg);
+}
+
+.nav-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.2rem;
+  list-style: none;
+}
+
+/* Descendant selector: only the links inside the nav list */
+.nav-links a {
+  display: block;
+  padding: 0.4rem 0.9rem;
+  border-radius: var(--pill);
+  color: var(--mute-light);
+  font-size: 0.95rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background-color var(--speed), color var(--speed);
+}
+
+.nav-links a:hover {
+  background-color: var(--sun);
+  color: var(--ink);
+}
+
+
+/* ----------------------------------------------------------
+   3. Hero: 18:40, the sun sets behind Erbil citadel
+   ---------------------------------------------------------- */
+
+.hero {
+  position: relative;
+  display: grid;
+  place-items: center;
+  min-height: clamp(36rem, 94svh, 60rem);
+  padding: clamp(5rem, 12vh, 8rem) var(--space-s) clamp(11rem, 26vh, 16rem);
+  text-align: center;
+  color: var(--cream);
+  background-image:
+    linear-gradient(180deg, oklch(15% 0.05 285 / 0.65) 0%, oklch(20% 0.06 300 / 0.15) 50%, oklch(15% 0.04 290 / 0) 100%),
+    url("../images/erbil-dusk.svg");
+  background-size: cover;
+  background-position: center bottom;
+  background-color: var(--plum);
+}
+
+.hero-content {
+  max-width: 48rem;
+}
+
+.hero-hello {
+  margin-bottom: 0.4rem;
+  font-family: var(--font-kurdish);
+  font-size: clamp(1.2rem, 1rem + 1vw, 1.6rem);
+  font-weight: 600;
+  color: var(--sun);
+}
+
+.hero h1 {
+  margin-bottom: var(--space-m);
+  font-size: clamp(3rem, 1.4rem + 7vw, 6.5rem);
+  letter-spacing: -0.02em;
+  line-height: 1;
+  text-shadow: 0 0.3rem 2rem oklch(12% 0.05 285 / 0.55);
+}
+
+/* Each line of the name sits in a mask so it can rise into view */
+.line {
+  display: block;
+  overflow: hidden;
+  padding-bottom: 0.1em;
+}
+
+.line > span {
+  display: inline-block;
+}
+
+.hero-role {
+  max-width: 36rem;
+  margin: 0 auto var(--space-l);
+  font-size: clamp(1.05rem, 0.95rem + 0.5vw, 1.3rem);
+  color: var(--sand);
+  text-shadow: 0 0.1rem 0.8rem oklch(12% 0.05 285 / 0.6);
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-s);
+}
+
+/* The badge is pinned to the hero's top right corner */
+.hero-badge {
+  position: absolute;
+  top: var(--space-m);
+  right: var(--space-m);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.35rem 0.95rem;
+  border-radius: var(--pill);
+  background-color: var(--cream);
+  color: var(--ink);
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  box-shadow: 0 0.5rem 1.5rem oklch(12% 0.05 285 / 0.35);
+}
+
+.pulse {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  background-color: oklch(68% 0.17 150);
+  box-shadow: 0 0 0 0 oklch(68% 0.17 150 / 0.6);
+}
+
+
+/* ----------------------------------------------------------
+   Extra: marquee ribbon of the things I work with
+   ---------------------------------------------------------- */
+
+.marquee {
+  overflow: hidden;
+  padding: 0.9rem 0;
+  background-color: var(--sun);
+  color: var(--ink);
+}
+
+.marquee-track {
+  display: flex;
+  width: max-content;
+}
+
+.marquee-list {
+  display: flex;
+  list-style: none;
+}
+
+.marquee-list li {
+  display: flex;
+  align-items: center;
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-style: italic;
+  white-space: nowrap;
+}
+
+.marquee-list li::after {
+  content: "✦";
+  margin: 0 1.5rem;
+  font-style: normal;
+  font-size: 0.9rem;
+  color: var(--ember);
+}
+
+.marquee-list li[lang="ckb"] {
+  font-family: var(--font-kurdish);
+  font-style: normal;
+}
+
+.marquee:hover .marquee-track {
+  animation-play-state: paused;
+}
+
+
+/* ----------------------------------------------------------
+   4. About: 19:10, golden hour
+   ---------------------------------------------------------- */
+
+.about {
+  background-image: linear-gradient(180deg, var(--cream) 0%, var(--cream) 45%, var(--peach) 100%);
+}
+
+/* flow-root makes the column contain its floated photo */
+.about-inner {
+  display: flow-root;
+  max-width: 44rem;
+  margin: 0 auto;
+}
+
+.about .kicker {
+  color: var(--ember);
+}
+
+.about-photo {
+  float: left;
+  width: clamp(7.5rem, 32%, 12rem);
+  margin: 0.4rem var(--space-l) var(--space-s) 0;
+  border: 0.35rem solid var(--cream);
+  border-radius: 50%;
+  box-shadow: 0 0 0 0.3rem var(--sun), 0 1.5rem 2.5rem -1rem oklch(40% 0.12 40 / 0.6);
+  shape-outside: circle(50%);
+}
+
+.about-inner p:not(.kicker) {
+  margin-bottom: var(--space-s);
+  font-size: 1.1rem;
+  text-align: justify;
+  hyphens: auto;
+}
+
+/* On narrow screens justified text leaves big gaps beside the photo */
+@media (max-width: 30rem) {
+  .about-inner p:not(.kicker) {
+    text-align: left;
+  }
+}
+
+.about-inner p:not(.kicker)::first-letter {
+  font-family: var(--font-display);
+  font-size: 3.2rem;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--ember);
+}
+
+
+/* ----------------------------------------------------------
+   Extra: one big statement that lights up as you scroll
+   ---------------------------------------------------------- */
+
+.statement {
+  padding: var(--space-xl) var(--space-s) var(--space-l);
+  background-image: linear-gradient(180deg, var(--peach) 0%, var(--ember) 18%, var(--plum) 45%, var(--dusk) 100%);
+}
+
+.statement-text {
+  max-width: 56rem;
+  margin: 0 auto;
+  font-family: var(--font-display);
+  font-size: clamp(1.7rem, 1rem + 3.2vw, 3.4rem);
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  color: var(--cream);
+  text-wrap: balance;
+}
+
+
+/* ----------------------------------------------------------
+   5. CV: 20:00, dusk. Timeline beside skill tags
+   ---------------------------------------------------------- */
+
+.cv {
+  color: var(--cream);
+  background-color: var(--dusk);
+  background-image: url("../images/stars.svg"), linear-gradient(180deg, var(--dusk) 0%, var(--night) 100%);
+  background-size: 38rem, auto;
+}
+
+.cv-inner {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-l) clamp(2.5rem, 6vw, 5rem);
+}
+
+.cv-column {
+  flex: 1 1 20rem;
+}
+
+/* The timeline line is the list's left border */
+.timeline {
+  list-style: none;
+  border-left: 0.15rem solid oklch(82% 0.14 80 / 0.45);
+}
+
+.timeline li {
+  position: relative;
+  padding: 0 0 var(--space-l) var(--space-m);
+}
+
+.timeline li:last-child {
+  padding-bottom: 0;
+}
+
+/* A glowing dot on the line beside each entry */
+.timeline li::before {
+  content: "";
+  position: absolute;
+  top: 0.35rem;
+  left: -0.6rem;
+  width: 1.05rem;
+  height: 1.05rem;
+  border: 0.22rem solid var(--dusk);
+  border-radius: 50%;
+  background-color: var(--sun);
+  box-shadow: 0 0 1rem oklch(82% 0.14 80 / 0.7);
+}
+
+.timeline h3 {
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+.timeline-meta {
+  margin: 0.2rem 0 0.4rem;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--sun);
+}
+
+.timeline p:not(.timeline-meta) {
+  color: var(--mute-light);
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+  margin-bottom: var(--space-l);
+  list-style: none;
+}
+
+.tags li {
+  padding: 0.35rem 0.95rem;
+  border: 0.0625rem solid var(--line-dark);
+  border-radius: var(--pill);
+  background-color: var(--glass);
+  font-size: 0.88rem;
+  font-weight: 600;
+  transition: background-color var(--speed), border-color var(--speed), color var(--speed);
+}
+
+.tags li:hover {
+  border-color: var(--sun);
+  background-color: var(--sun);
+  color: var(--ink);
+}
+
+.tags-alt li {
+  border-color: oklch(82% 0.14 80 / 0.55);
+  color: var(--sun);
+}
+
+
+/* ----------------------------------------------------------
+   6. Projects: 21:30, night. Live demo and an auto-fit grid
+   ---------------------------------------------------------- */
+
+.projects {
+  color: var(--cream);
+  background-color: var(--night);
+  background-image: url("../images/stars.svg");
+  background-size: 38rem;
+  background-position: 17rem 9rem;
+}
+
+/* Extra: a browser window with a live KurdType typing demo */
+.demo {
+  margin-bottom: var(--space-l);
+  overflow: hidden;
+  border: 0.0625rem solid var(--line-dark);
+  border-radius: var(--radius);
+  background-color: oklch(15% 0.04 285);
+  box-shadow: inset 0 0.0625rem 0 oklch(100% 0 0 / 0.08), 0 2rem 4rem -2rem oklch(5% 0.03 285 / 0.9);
+}
+
+.demo-bar {
+  display: flex;
+  align-items: center;
+  gap: var(--space-s);
+  padding: 0.75rem var(--space-s);
+  border-bottom: 0.0625rem solid var(--line-dark);
+}
+
+.demo-dots {
+  display: flex;
+  gap: 0.4rem;
+}
+
+.demo-dots span {
+  width: 0.7rem;
+  height: 0.7rem;
+  border-radius: 50%;
+  background-color: var(--ember);
+}
+
+.demo-dots span:nth-child(2) {
+  background-color: var(--sun);
+}
+
+.demo-dots span:nth-child(3) {
+  background-color: oklch(68% 0.17 150);
+}
+
+.demo-url {
+  flex: 1;
+  max-width: 20rem;
+  margin: 0 auto;
+  padding: 0.2rem 0.8rem;
+  border-radius: var(--pill);
+  background-color: var(--glass);
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  text-align: center;
+  color: var(--mute-light);
+}
+
+.demo-body {
+  padding: clamp(1.5rem, 5vw, 3.5rem) var(--space-m);
+  text-align: center;
+}
+
+.demo-label {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--mute-light);
+}
+
+/* The ghost text sets the size; the typed copy grows over it */
+.demo-line {
+  display: grid;
+  justify-content: center;
+  margin: var(--space-s) 0 var(--space-l);
+  font-family: var(--font-kurdish);
+  font-size: clamp(1.4rem, 0.8rem + 4vw, 3.4rem);
+  line-height: 1.5;
+}
+
+.demo-ghost,
+.demo-typed {
+  grid-area: 1 / 1;
+  white-space: nowrap;
+}
+
+.demo-ghost {
+  color: oklch(100% 0 0 / 0.18);
+}
+
+.demo-typed {
+  justify-self: start;
+  overflow: hidden;
+  border-inline-end: 0.15rem solid var(--sun);
+  color: var(--sun);
+}
+
+.demo-stats {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-m) clamp(2rem, 8vw, 5rem);
+}
+
+.demo-stats dt {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--mute-light);
+}
+
+.demo-stats dd {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 1.5rem + 2vw, 2.8rem);
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+.demo figcaption {
+  padding: var(--space-s) var(--space-m);
+  border-top: 0.0625rem solid var(--line-dark);
+  font-size: 0.9rem;
+  text-align: center;
+  color: var(--mute-light);
+}
+
+/* The project grid reflows by itself, with no media queries */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 15.5rem), 1fr));
+  gap: var(--space-m);
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border-top: 0.3rem solid var(--sun);
+  border-radius: var(--radius);
+  background-color: var(--cream);
+  color: var(--ink);
+  box-shadow: var(--shadow-card);
+  transition: transform 0.4s var(--ease), box-shadow 0.4s var(--ease);
+}
+
+/* Each card in a row of four gets its own accent colour */
+.card:nth-child(4n + 2) {
+  border-top-color: var(--ember);
+}
+
+.card:nth-child(4n + 3) {
+  border-top-color: var(--rose);
+}
+
+.card:nth-child(4n) {
+  border-top-color: oklch(68% 0.12 200);
+}
+
+.card:hover {
+  transform: translateY(-0.6rem);
+  box-shadow: var(--shadow-lift);
+}
+
+.card-media {
+  overflow: hidden;
+  background-color: var(--night);
+}
+
+.card img {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  transition: transform 0.6s var(--ease);
+}
+
+.card:hover img {
+  transform: scale(1.05);
+}
+
+.card-body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  padding: var(--space-m);
+}
+
+.card-tag {
+  margin-bottom: 0.4rem;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ember);
+}
+
+.card-body h3 {
+  margin-bottom: 0.5rem;
+  font-size: 1.3rem;
+}
+
+.card-body p:not(.card-tag) {
+  flex: 1;
+  margin-bottom: var(--space-s);
+  font-size: 0.95rem;
+  color: var(--mute);
+}
+
+.card-body a {
+  align-self: flex-start;
+  font-weight: 700;
+  text-decoration-color: var(--sun);
+  text-decoration-thickness: 0.15rem;
+  text-underline-offset: 0.3rem;
+}
+
+.card-body a span {
+  display: inline-block;
+  transition: transform var(--speed) var(--ease);
+}
+
+.card-body a:hover span {
+  transform: translateX(0.3rem);
+}
+
+
+/* ----------------------------------------------------------
+   Extra: the numbers, counted up with CSS counters
+   ---------------------------------------------------------- */
+
+/* A typed custom property can be animated as a whole number */
+@property --n {
+  syntax: "<integer>";
+  inherits: false;
+  initial-value: 0;
+}
+
+.stats {
+  padding: 0 var(--space-s) var(--space-xl);
+  color: var(--cream);
+  background-color: var(--night);
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 13rem), 1fr));
+  max-width: 70rem;
+  margin: 0 auto;
+  border-top: 0.0625rem solid var(--line-dark);
+  list-style: none;
+}
+
+.stats-grid li {
+  padding: var(--space-l) var(--space-s) 0 0;
+  color: var(--mute-light);
+}
+
+.count {
+  --n: var(--to);
+  counter-reset: num var(--n);
+}
+
+.count::after {
+  content: counter(num);
+}
+
+.stats-grid .count {
+  display: block;
+  font-family: var(--font-display);
+  font-size: clamp(3rem, 2rem + 4vw, 5rem);
+  font-weight: 700;
+  line-height: 1;
+  color: var(--sun);
+}
+
+.count-wpm { --to: 62; }
+.count-acc { --to: 97; }
+.count-acc::after { content: counter(num) "%"; }
+.count-projects { --to: 8; }
+.count-skills { --to: 14; }
+.count-layouts { --to: 3; }
+.count-js { --to: 0; }
+
+
+/* ----------------------------------------------------------
+   Extra: how I build. The heading stays put beside the steps
+   ---------------------------------------------------------- */
+
+.process {
+  color: var(--cream);
+  background-image: linear-gradient(180deg, var(--night) 0%, var(--midnight) 100%);
+}
+
+.process-inner {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr));
+  gap: var(--space-l) clamp(2.5rem, 6vw, 5rem);
+}
+
+.process-head {
+  position: sticky;
+  top: 6rem;
+  align-self: start;
+}
+
+.process-head p:not(.kicker) {
+  color: var(--mute-light);
+}
+
+.steps {
+  display: grid;
+  gap: var(--space-s);
+  list-style: none;
+  counter-reset: step;
+}
+
+.steps li {
+  position: relative;
+  overflow: hidden;
+  padding: var(--space-m) var(--space-m) var(--space-m) 5rem;
+  border: 0.0625rem solid var(--line-dark);
+  border-radius: var(--radius);
+  background-color: var(--glass);
+  counter-increment: step;
+}
+
+.steps li::before {
+  content: counter(step, decimal-leading-zero);
+  position: absolute;
+  top: var(--space-m);
+  left: var(--space-m);
+  font-family: var(--font-mono);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--sun);
+}
+
+/* A progress line under each step */
+.steps li::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 0.2rem;
+  background-image: linear-gradient(90deg, var(--sun), var(--ember));
+}
+
+.steps h3 {
+  margin-bottom: 0.35rem;
+}
+
+.steps p {
+  color: var(--mute-light);
+}
+
+
+/* ----------------------------------------------------------
+   7a. Contact: 22:15, lamplight. Details beside the form
+   ---------------------------------------------------------- */
+
+.contact {
+  color: var(--cream);
+  background-color: var(--midnight);
+  background-image: radial-gradient(ellipse at 75% 55%, oklch(60% 0.16 50 / 0.3), oklch(60% 0.16 50 / 0) 60%);
+}
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 22rem), 1fr));
+  gap: var(--space-l) clamp(2.5rem, 6vw, 5rem);
+  align-items: center;
+}
+
+.contact-details p:not(.kicker) {
+  color: var(--mute-light);
+}
+
+.contact-list {
+  margin-top: var(--space-l);
+  list-style: none;
+}
+
+.contact-list li {
+  padding: 0.75rem 0;
+  border-top: 0.0625rem solid var(--line-dark);
+}
+
+.contact-list span {
+  display: inline-block;
+  min-width: 5.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--sun);
+}
+
+.contact-list a {
+  text-decoration-color: var(--sun);
+  text-underline-offset: 0.25rem;
+}
+
+/* Form: a lit window. Name and email share a row */
+.contact-form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-s);
+  padding: clamp(1.25rem, 4vw, 2.25rem);
+  border-radius: var(--radius);
+  background-color: var(--cream);
+  color: var(--ink);
+  box-shadow: inset 0 0.0625rem 0 var(--white), 0 0 4rem oklch(70% 0.15 60 / 0.35), 0 2rem 4rem -2rem oklch(5% 0.03 285 / 0.9);
+}
+
+/* The message and the button span both columns */
+.field-wide {
+  grid-column: 1 / -1;
+}
+
+.field {
+  min-width: 0;
+}
+
+.field label {
+  display: block;
+  margin-bottom: 0.35rem;
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.field input,
+.field textarea {
+  width: 100%;
+  padding: 0.75rem 0.9rem;
+  border: 0.0625rem solid var(--line);
+  border-radius: 0.6rem;
+  background-color: var(--white);
+  color: var(--ink);
+  font: inherit;
+  font-size: 0.95rem;
+  transition: border-color var(--speed), box-shadow var(--speed);
+}
+
+.field textarea {
+  resize: vertical;
+}
+
+/* The email field has a sun-coloured edge to mark it as an address */
+input[type="email"] {
+  border-left: 0.3rem solid var(--sun);
+}
+
+/* Focused fields get an ember border and a warm glow */
+input:focus,
+textarea:focus {
+  outline: none;
+  border-color: var(--ember);
+  box-shadow: 0 0 0 0.25rem oklch(60% 0.16 38 / 0.22);
+}
+
+.contact-form .btn:hover {
+  background-color: var(--ink);
+  border-color: var(--ink);
+  color: var(--cream);
+}
+
+
+/* ----------------------------------------------------------
+   7b. Footer: 23:59, midnight. Three Flexbox columns
+   ---------------------------------------------------------- */
+
+.footer {
+  padding: var(--space-l) var(--space-s) 6rem;
+  border-top: 0.0625rem solid var(--line-dark);
+  background-color: var(--midnight);
+  background-image: url("../images/stars.svg");
+  background-size: 30rem;
+  color: var(--mute-light);
+}
+
+.footer-inner {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-m) var(--space-l);
+  max-width: 70rem;
+  margin: 0 auto;
+}
+
+.footer-col {
+  flex: 1;
+  min-width: min(100%, 13rem);
+}
+
+.footer h2 {
+  margin-bottom: 0.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--sun);
+}
+
+.footer p {
+  font-size: 0.92rem;
+}
+
+.footer a {
+  color: var(--cream);
+  text-underline-offset: 0.2rem;
+}
+
+.footer-copy {
+  margin-top: 0.5rem;
+  font-family: var(--font-mono);
+  opacity: 0.7;
+}
+
+/* Back to top: fixed to the window's bottom right corner */
+.to-top {
+  position: fixed;
+  right: var(--space-s);
+  bottom: var(--space-s);
+  z-index: 20;
+  padding: 0.6rem 1.1rem;
+  border-radius: var(--pill);
+  background-color: var(--sun);
+  color: var(--ink);
+  font-size: 0.9rem;
+  font-weight: 700;
+  text-decoration: none;
+  box-shadow: 0 0 0 0.25rem oklch(82% 0.14 80 / 0.25), 0 0.75rem 1.5rem oklch(5% 0.03 285 / 0.5);
+  transition: transform var(--speed) var(--ease), background-color var(--speed);
+}
+
+.to-top:hover {
+  background-color: var(--cream);
+  transform: translateY(-0.2rem);
+}
+
+
+/* ----------------------------------------------------------
+   Motion. Everything above is the finished, still page.
+   Movement is only added for people who have not asked
+   their system to reduce motion.
+   ---------------------------------------------------------- */
+
+@keyframes rise {
+  from { transform: translateY(105%); }
+}
+
+@keyframes fade-up {
+  from { opacity: 0; translate: 0 1.5rem; }
+}
+
+@keyframes pulse {
+  70% { box-shadow: 0 0 0 0.5rem oklch(68% 0.17 150 / 0); }
+  100% { box-shadow: 0 0 0 0 oklch(68% 0.17 150 / 0); }
+}
+
+@keyframes marquee {
+  to { transform: translateX(-50%); }
+}
+
+@keyframes type {
+  0% { width: 0; }
+  50%, 85% { width: 100%; }
+  100% { width: 0; }
+}
+
+@keyframes blink {
+  50% { border-color: transparent; }
+}
+
+@keyframes count {
+  from { --n: 0; }
+}
+
+@keyframes count-down {
+  from { --n: 100; }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  /* The name rises line by line out of its mask */
+  .line > span {
+    animation: rise 1s var(--ease) both;
+  }
+
+  .line + .line > span {
+    animation-delay: 0.12s;
+  }
+
+  .hero .kicker,
+  .hero-hello,
+  .hero-role,
+  .hero-actions,
+  .hero-badge {
+    animation: fade-up 0.9s var(--ease) 0.35s both;
+  }
+
+  .pulse {
+    animation: pulse 2s infinite;
+  }
+
+  .marquee-track {
+    animation: marquee 40s linear infinite;
+  }
+
+  /* The Kurdish sentence types itself, right to left, then starts again */
+  .demo-typed {
+    animation: type 7s steps(19) infinite, blink 0.8s step-end infinite;
+  }
+
+  .count {
+    animation: count 2.2s var(--ease) 0.4s both;
+  }
+
+  .count-js {
+    animation-name: count-down;
+  }
+}
+
+/* Scroll-driven motion, for browsers that support it */
+@keyframes window-open {
+  from { clip-path: inset(0.9rem round 2rem); }
+  to { clip-path: inset(0 round 0); }
+}
+
+@keyframes drift {
+  to { transform: translateY(-4rem); opacity: 0.15; }
+}
+
+@keyframes brighten {
+  from { background-position: 100% 0; }
+  to { background-position: 0% 0; }
+}
+
+@keyframes fill {
+  from { transform: scaleX(0); }
+}
+
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    /* The hero starts as a framed window and opens to full width */
+    .hero {
+      animation: window-open linear both;
+      animation-timeline: scroll(root);
+      animation-range: 0 60vh;
+    }
+
+    .hero-content {
+      animation: drift linear both;
+      animation-timeline: scroll(root);
+      animation-range: 0 90vh;
+    }
+
+    /* The statement lights up word by word as it crosses the screen */
+    .statement-text span {
+      background-image: linear-gradient(90deg, var(--cream) 48%, oklch(100% 0 0 / 0.2) 52%);
+      background-size: 200% 100%;
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      animation: brighten linear both;
+      animation-timeline: view();
+      animation-range: entry 60% cover 60%;
+    }
+
+    /* Each step's progress line fills as it scrolls into view */
+    .steps li::after {
+      transform-origin: left;
+      animation: fill linear both;
+      animation-timeline: view();
+      animation-range: entry 40% cover 50%;
+    }
+
+    /* Numbers count up when they arrive on screen */
+    .stats-grid .count {
+      animation: count linear both;
+      animation-timeline: view();
+      animation-range: entry 20% cover 40%;
+    }
+
+    .stats-grid .count-js {
+      animation-name: count-down;
+    }
+
+    /* Cards rise gently into place */
+    .card,
+    .timeline li,
+    .demo {
+      animation: fade-up linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 70%;
+    }
+  }
+}
