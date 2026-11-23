@@ -295,11 +295,9 @@ button:focus-visible {
   text-shadow: 0 0.3rem 2rem oklch(12% 0.05 285 / 0.55);
 }
 
-/* Each line of the name sits in a mask so it can rise into view */
+/* Each line of the name rises into view on its own */
 .line {
   display: block;
-  overflow: hidden;
-  padding-bottom: 0.1em;
 }
 
 .line > span {
@@ -1124,7 +1122,7 @@ textarea:focus {
    ---------------------------------------------------------- */
 
 @keyframes rise {
-  from { transform: translateY(105%); }
+  from { opacity: 0; transform: translateY(45%); }
 }
 
 @keyframes fade-up {
